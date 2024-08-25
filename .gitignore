@@ -1,0 +1,14 @@
+node_modules/*
+.*swp
+output_report.txt
+output_tie.toml
+todo
+AT1M*.Raw
+docs/*.aux
+docs/*.bbl
+docs/*.blg
+docs/*latexmk
+docs/*.log
+docs/*.out
+docs/*.toc
+docs/*.fls
