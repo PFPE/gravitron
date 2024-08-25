@@ -1,7 +1,7 @@
 {
-  "name": "electron-gravgui",
+  "name": "gravitron",
   "version": "1.0.0",
-  "description": "",
+  "description": "An electron GUI for recording/calculating gravity ties on UNOLS vessels",
   "main": "main.js",
   "license": "GPL-3.0-only",
   "scripts": {
