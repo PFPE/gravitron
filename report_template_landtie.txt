@@ -1,0 +1,39 @@
+
+Ship: {{shipName}}
+Personnel: {{personnel}}
+
+#Base Station:
+Name: {{stationName}}
+Number: {{stationNumber}}
+Known absolute gravity (mGal): {{stationGrav}}
+
+------------------- Land tie ----------------
+
+Land meter #: {{landMeter}}
+Meter temperature: {{meterTemp}}
+
+#New station A:
+Name: {{shipName}}
+Latitude (deg): {{shipLat}}
+Longitude (deg): {{shipLon}}
+Elevation (m): {{shipElev}}
+UTC time and meter gravity (mGal) at A1: {{ltime1}} {{lgrav1}}
+UTC time and meter gravity (mGal) at B: {{ltime2}} {{lgrav2}}
+UTC time and meter gravity (mGal) at A2: {{ltime3}} {{lgrav3}}
+Delta_T_ab (s): {{dtAB}}
+Delta_T_aa (s): {{dtAA}}
+Drift (mGal): ({{lgrav3}} - {{lgrav1}})/{{dtAA}} = {{drift}}
+Drift corrected meter gravity at B (mGal): {{lgrav2}} - {{dtAB}} * {{drift}} = {{dc_avg_mgals_B}}
+Gravity at pier (mGal): {{stationGrav}} + {{lgrav1}} - {{dc_avg_mgals_B}} = {{landTieValue}}
+
+------------------- End of land tie ----------------
+
+Gravity at pier (mGal): {{landTieValue}}
+UTC time and water height to pier (m) 1: {{htime1}} {{height1}}
+UTC time and water height to pier (m) 2: {{htime2}} {{height2}}
+UTC time and water height to pier (m) 3: {{htime3}} {{height3}}
+
+DgS meter gravity (mGal): {{dgsGrav}}
+Average water height to pier (m): {{avgHeight}}
+Gravity at water line (mGal): {{stationGrav}} + 0.3086 * {{avgHeight}} = {{waterGrav}}
+DgS meter bias (mGal): {{waterGrav}} - {{dgsGrav}} = {{bias}}

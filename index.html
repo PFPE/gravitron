@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gravitron</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            /*justify-content: center;*/
+            align-items: flex-start;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+        .column {
+            flex: 1;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-right: 20px;
+            min-width: 200px;
+        }
+        .column-narrow {
+            flex: 1;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-right: 20px;
+            min-width: 150px;
+        }
+        .section-essential {
+          border: 2px solid black; /* Black border around each section */
+          padding: 5px;           /* Optional padding inside the section */
+          margin-bottom: 5px;     /* Space between sections */
+        }
+        .section-landtie {
+          border: 2px solid rgb(175, 175, 175); /* Black border around each section */
+          padding: 5px;           /* Optional padding inside the section */
+          margin-bottom: 5px;     /* Space between sections */
+        }
+        .entry-group {
+            margin-bottom: 10px; /* Add space between entry groups */
+            align-items: center;
+        }
+        .input-no-button {
+            display: flex;
+            align-items: center; /* Align input and button vertically */
+        }
+
+        .input-no-button input[type="number"] {
+            padding: 5px;
+            margin-right: 10px;
+            width: 150px;
+            box-sizing: border-box;
+        }
+
+        .input-button-group {
+            display: flex;
+            align-items: center; /* Align input and button vertically */
+        }
+
+        .input-button-group input[type="text"],
+        .input-button-group input[type="number"] {
+            padding: 5px;
+            margin-right: 10px;
+            width: 100px;
+            box-sizing: border-box;
+        }
+
+        .entry-note {
+            font-size: 12px; /* Smaller text size */
+            color: #666; /* Optional: Set a lighter color */
+            margin-top: 5px; /* Add space between the button and the note */
+        }
+        button {
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+        .dropdown {
+          margin-left: 5px;
+          margin-bottom: 10px;
+          font-size: 14px;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 26px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 26px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(34px);
+        }
+    </style>
+</head>
+<body>
+    <!-- First Column -->
+    <div class="column">
+    <div class="section-essential">
+    <!-- ship select dropdown -->
+    <div class="dropdown">
+          <select id="shipDropdown">
+          </select>
+    </div>
+    <!-- station select dropdown -->
+    <div class="dropdown">
+          <select id="stationDropdown">
+          </select>
+    </div>
+    <div class="entry-group">
+      <div class="input-button-group">
+        <input type="number" step="0.01" id="gravOverride" placeholder="station grav">
+        <button id="btnOverrideGrav">Save</button>
+      </div>
+    </div>
+    <!-- personnel field -->
+    <div class="entry-group">
+      <div class="input-button-group">
+        <input type="text" id="personField" placeholder="your name">
+        <button id="btnPersonSave">Save</button>
+      </div>
+    </div>
+    </div>
+
+    <!-- water height fields and timestamp buttons -->
+    <div class="section-essential">
+    <div class="entry-group">
+      <div class="input-button-group">
+        <input type="number" step=0.01 id="heightField1" placeholder="height 1">
+        <button id="Height1Save">Save</button>
+      </div>
+      <small class="entry-note" id="height1Entered">height 1 timestamp</small>
+    </div>
+    <div class="entry-group">
+      <div class="input-button-group">
+        <input type="number" step=0.01 id="heightField2" placeholder="height 2">
+        <button id="Height2Save">Save</button>
+      </div>
+      <small class="entry-note" id="height2Entered">height 2 timestamp</small>
+    </div>
+    <div class="entry-group">
+      <div class="input-button-group">
+        <input type="number" step=0.01 id="heightField3" placeholder="height 3">
+        <button id="Height3Save">Save</button>
+      </div>
+      <small class="entry-note" id="height3Entered">height 3 timestamp</small>
+    </div>
+    </div>
+    <div class="section-landtie">
+      <div class="input-no-button">
+        <input type="number" step=0.01 id="shipLon" placeholder="ship lon (deg)" disabled>
+      </div>
+      <div class="input-no-button">
+        <input type="number" step=0.01 id="shipLat" placeholder="ship lat (deg)" disabled>
+      </div>
+      <div class="input-no-button">
+        <input type="number" step=0.1 id="shipElev" placeholder="elevation (m)" disabled>
+      </div>
+      <div class="input-no-button">
+        <input type="number" step=0.1 id="shipTemp" placeholder="temperature (C)"disabled>
+      </div>
+      <div class="input-no-button">
+        <button id="saveLTmeta" disabled>Save</button>
+      </div>
+    </div>
+
+    </div>
+
+    <!-- Second Column -->
+    <div class="column">
+      <div class="section-landtie">
+      <!-- land tie toggle switch-->
+      <label class="switch">
+          <input type="checkbox" id="toggleSwitch">
+          <span class="slider"></span>
+      </label>
+      <p>Land tie: <span id="toggleState">OFF</span></p>
+
+        <div class="entry-group">
+      <div class="input-button-group">
+            <input type="text" id="lta1" placeholder="Land 1.1" disabled>
+            <button id="btnlta1" disabled>Save</button>
+        </div>
+          <small class="entry-note" id="a1Entered">Land 1.1 timestamp</small>
+        </div>
+        <div class="entry-group">
+      <div class="input-button-group">
+            <input type="text" id="lta2" placeholder="Land 1.2" disabled>
+            <button id="btnlta2" disabled>Save</button>
+        </div>
+          <small class="entry-note" id="a2Entered">Land 1.2 timestamp</small>
+        </div>
+        <div class="entry-group">
+      <div class="input-button-group">
+            <input type="text" id="lta3" placeholder="Land 1.3" disabled>
+            <button id="btnlta3" disabled>Save</button>
+        </div>
+          <small class="entry-note" id="a3Entered">Land 1.3 timestamp</small>
+        </div>
+        <div class="entry-group">
+      <div class="input-button-group">
+            <input type="text" id="ltb1" placeholder="Land 2.1" disabled>
+            <button id="btnltb1" disabled>Save</button>
+        </div>
+          <small class="entry-note" id="b1Entered">Land 2.1 timestamp</small>
+        </div>
+        <div class="entry-group">
+      <div class="input-button-group">
+            <input type="text" id="ltb2" placeholder="Land 2.2" disabled>
+            <button id="btnltb2" disabled>Save</button>
+        </div>
+          <small class="entry-note" id="b2Entered">Land 2.2 timestamp</small>
+        </div>
+        <div class="entry-group">
+      <div class="input-button-group">
+            <input type="text" id="ltb3" placeholder="Land 2.3" disabled>
+            <button id="btnltb3" disabled>Save</button>
+        </div>
+          <small class="entry-note" id="b3Entered">Land 2.3 timestamp</small>
+        </div>
+        <div class="entry-group">
+      <div class="input-button-group">
+            <input type="text" id="ltc1" placeholder="Land 3.1" disabled>
+            <button id="btnltc1" disabled>Save</button>
+        </div>
+          <small class="entry-note" id="c1Entered">Land 3.1 timestamp</small>
+        </div>
+        <div class="entry-group">
+      <div class="input-button-group">
+            <input type="text" id="ltc2" placeholder="Land 3.2" disabled>
+            <button id="btnltc2" disabled>Save</button>
+        </div>
+          <small class="entry-note" id="c2Entered">Land 3.2 timestamp</small>
+        </div>
+        <div class="entry-group">
+      <div class="input-button-group">
+            <input type="text" id="ltc3" placeholder="Land 3.3" disabled>
+            <button id="btnltc3" disabled>Save</button>
+        </div>
+          <small class="entry-note" id="c3Entered">Land 3.3 timestamp</small>
+        </div>
+
+        <div class="entry-group">
+        <button id="btnSelectCalFile" disabled>Choose calibration file</button>
+        </div>
+
+        <div class="entry-group">
+        <button id="btnDoLandTie" disabled>Calculate land tie</button>
+        </div>
+        </div>
+    </div>
+
+    <!-- Third Column -->
+    <div class="column-narrow">
+        <!-- 7 Buttons -->
+        <div class="entry-group">
+        <button id="btnSelectDGS">Select DGS file</button>
+        </div>
+        <div class="entry-group">
+        <button id="btnComputeBias">Compute bias</button>
+        </div>
+        <div class="entry-group">
+        <button id="btnLoadSavedTie">Load saved tie</button>
+        </div>
+        <div class="entry-group">
+        <button id="btnSaveTie">Save current tie</button>
+        </div>
+        <div class="entry-group">
+        <button id="btnOutputReport">Output tie report</button>
+        </div>
+    </div>
+
+    <!-- fourth column, for saved stuff-->
+     <div class="column">
+      <div>
+        <p id="selectedShip">Ship:</p>
+      </div>
+      <div>
+        <p id="selectedStation">Station:</p>
+        <p id="stationGrav">Gravity:</p>
+      </div>
+      <div>
+        <p id="savedPerson">Person:</p>
+      </div>
+      <div>
+        <p id="statusText"></p>
+      </div>
+      <div class="container">
+        <canvas id="myChart" width="200" height="200"></canvas>
+      </div>
+      
+     </div>
+         <script src="./node_modules/chart.js/dist/chart.umd.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>-->
+    <script src='./renderer.js'></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+    "name": "electron-gravgui",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "license":"GPL-3.0-only",
+    "scripts": {
+        "start": "electron ."
+    },
+    "devDependencies": {
+        "electron": "^26.1.0"
+    },
+    "dependencies": {
+        "chart.js": "^4.4.3"
+    }
+}

@@ -1,0 +1,24 @@
+
+Ship: {{shipName}}
+Personnel: {{personnel}}
+
+#Base Station:
+Name: {{stationName}}
+Number: {{stationNumber}}
+Known absolute gravity (mGal): {{stationGrav}}
+
+------------------- Land tie ----------------
+
+N/A
+
+------------------- End of land tie ----------------
+
+Gravity at pier (mGal): {{stationGrav}}
+UTC time and water height to pier (m) 1: {{htime1}}  {{height1}}
+UTC time and water height to pier (m) 2: {{htime2}}  {{height2}}
+UTC time and water height to pier (m) 3: {{htime3}}  {{height3}}
+
+DgS meter gravity (mGal): {{dgsGrav}}
+Average water height to pier (m): {{avgHeight}}
+Gravity at water line (mGal): {{stationGrav}} + 0.3086 * {{avgHeight}} = {{waterGrav}}
+DgS meter bias (mGal): {{waterGrav}} - {{dgsGrav}} = {{bias}}
