@@ -1,0 +1,40 @@
+name: build gravitron for ubuntu
+on: [workflow_dispatch]
+
+jobs:
+  build_on_linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version-file: 'package.json'
+    - name: install dependencies (clean-install)
+      run: npm ci
+    - name: build app, hopefully
+      run: npm run make
+
+#  build_on_mac:
+#    runs-on: macos-latest
+#    steps:
+#    - uses: actions/checkout@v2
+#    - uses: actions/setup-node@master
+#      with:
+#        node-version: 14
+#    - name: install dependencies
+#      run: npm install
+#    - name: build
+#      run: npm run make
+#
+#  build_on_win:
+#    runs-on: windows-latest
+#    steps:
+#    - uses: actions/checkout@v2
+#    - uses: actions/setup-node@master
+#      with:
+#        node-version: 14
+#    - name: install dependencies
+#      run: npm install
+#    - name: build
+#      run: npm run make
+
