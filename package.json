@@ -4,15 +4,6 @@
   "author": "PFPE",
   "description": "An electron GUI for recording/calculating gravity ties on UNOLS vessels",
   "main": "main.js",
-  "config": {
-    "forge": {
-      "packagerConfig": {
-        "extraResource": [
-          "database"
-        ]
-      }
-    }
-  },
   "license": "GPL-3.0-only",
   "scripts": {
     "start": "electron-forge start",
