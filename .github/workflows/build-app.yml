@@ -1,8 +1,8 @@
-name: build gravitron
+name: build and release gravitron
 on: [workflow_dispatch]
 
 jobs:
-  build:
+  buildrelease:
     runs-on: ${{ matrix.os }}
     
     strategy:
@@ -18,3 +18,7 @@ jobs:
       run: npm ci
     - name: build app, hopefully
       run: npm run make
+    - name: publish
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: npm run publish
