@@ -25,13 +25,15 @@ module.exports = {
       config: {},
     },
   ],
-  hooks: {
+  hooks: [
+    {
     packageAfterCopy: async (config, buildPath, electronVersion, platform, arch) => {
       var src = path.join(__dirname, './database');
       var dst = buildPath;
       fs.cpSync(src, dst, {recursive: true});
     }
-  },
+    },
+  ],
   publishers: [
     {
       "name": "@electron-forge/publisher-github",
