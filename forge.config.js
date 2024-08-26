@@ -30,8 +30,10 @@ module.exports = {
       "config": {
         "repository": {
           "owner": "hfmark",
-          "name": "gravitron-test-release"
-        }
+          "name": "gravitron"
+        },
+        prerelease: false,
+        draft: true
       }
     }
   ],
