@@ -107,7 +107,7 @@ function openManualWindow() {
     },
   });
 
-  const pdfPath = path.join(__dirname,'docs/main.pdf');
+  const pdfPath = path.join(resPath,'./docs/main.pdf');
   helpWindow.loadURL(`file://${pdfPath}`);
 }
 
