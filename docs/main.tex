@@ -39,10 +39,24 @@ gravitron is a GUI software tool for recording gravity ties and calculating mete
 \label{install}
 gravitron is an electron app for node.js v20+. If you read that last sentence and thought ``ok, I know what to do with that'' then feel free to grab the source code (\url{https://github.com/hfmark/gravitron}), and build/run it as you would any similar program on your operating system of choice. If you're not as used to programs like this, read on for some instructions.
 
-\subsection{Packaged app}
-There are packaged applications for linux, Mac OS, and Windows available on the github releases page (\url{https://github.com/hfmark/gravitron/releases}). These will likely work well on linux, but may or may not properly install on Mac OS or Windows because they are not ``official'' applications distributed through Apple or Microsoft app stores. We promise there's nothing malicious in there, so if you can convince your computer to install from one of these packages, that's the simplest option. You can then run gravitron as you would any other application. If that doesn't work for you, read on for a simple workaround.
+\subsection{Option 1: Packaged app}
+There are packaged applications for linux, Mac OS, and Windows available on the github releases page (\url{https://github.com/hfmark/gravitron/releases}). These will likely work well on linux, but may or may not properly install on Mac OS or Windows because they are not ``official'' applications distributed through Apple or Microsoft app stores. We promise there's nothing malicious in there, so if you can convince your computer to install from one of these packages, that's the simplest option. You can then run gravitron as you would any other application. If that doesn't work for you, go to Section \ref{runwithnode} for an alternative.
 
-\subsection{Run the code on your own}
+\subsubsection{Linux app}
+The github releases page has .rpm and .deb packages. For Ubuntu, download the .deb package and install either with software installer or by running \texttt{sudo dpkg -i /path/to/deb/file}.
+
+\subsubsection{Windows app}
+The packaged .exe installer has been tested on Windows 11 and it seems to work! When you download and run the installer you will likely see a system prompt warning you that the program does not have a verified author. If you click on the ``more info'' button it should let you tell it to install anyway. Once it has installed and opened the application, pinning the app to the taskbar is recommended to make it easier to find later. Otherwise, the executable can be found at: 
+
+\texttt{C\textbackslash :Users\textbackslash (yourname)\textbackslash AppData\textbackslash Local\textbackslash gravitron\textbackslash app-1.0.0\textbackslash gravitron.exe}. 
+
+\noindent \texttt{AppData} is a hidden folder.
+
+\subsubsection{Mac app}
+Download the darwin arm64 zip file from the releases page, and good luck.
+
+\subsection{Option 2: Run the code on your own}
+\label{runwithnode}
 The gravitron source code contains all the necessary pieces and instructions to install dependencies and run locally, provided you have node.js on your system. So, here's how you do it:
 \begin{itemize}
     \item Install node and npm on your computer (instructions at \url{https://nodejs.org/en/download}). In a terminal (or powershell), make sure that if you run \texttt{node -v} and \texttt{npm -v}, the commands return version numbers for node and npm.
@@ -72,6 +86,7 @@ The gravitron window (Figure~\ref{fig:window}) has 4 columns. The columns contai
 \item Status messages
 \end{enumerate}
 
+\noindent
 Buttons and fields for land tie information and actions will appear greyed out unless the land tie toggle button is set to "on".
 
 \subsection{Steps for taking a tie}
@@ -132,7 +147,7 @@ Note that gravitron doesn't automatically save or read toml files -- it only tou
 
 \subsection{Database files}
 \label{datab}
-gravitron ships with a set of text files with that contain some information on UNOLS ships, stations with known gravity measurements, and calibration files for some land meters. Some of these files are automatically read by the program; the meter calibration files may be loaded by the usre when a land tie is done.
+gravitron ships with a set of text files with that contain some information on UNOLS ships, stations with known gravity measurements, and calibration tables for some land meters. Some of these files are automatically read by the program; the meter calibration files may be loaded by the user when a land tie is done.
 
 The ship is used in gravitron to determine how DGS files are read. While most UNOLS ships with DGS gravimeters write out `laptop' data files in a common format, there are some exceptions, and we've done our best to accommodate file format differences but we can't plan for ships that we don't know about. So, if you select a ship that we don't yet know the file format for, you will not be able to read in a DGS file. You can still record tie measurements and write them out in a toml file, and bias can be calculated later once you or we have figured out how to read the relevant meter file.
 
@@ -159,7 +174,12 @@ DGS gravimeters contain AT1M sensors. The AT1M sensor is a scalar gravity/specif
 \subsection{Troubleshooting}
 
 \subsubsection{The packaged app doesn't work}
-The packaged apps may not install properly because of security features in some operating systems. You may also be using a version of your operating system that differs significantly from the version that packaged app was compiled for. In either case, the easiest solution is to install node.js and run the app from the source files sans packaging. Instructions for this are in Section~\ref{install}.
+The packaged apps may not install properly because of security features in some operating systems. You may also be using a version of your operating system that differs significantly from the version that packaged app was compiled for. In either case, the easiest solution is probably just to install node.js and run the app from the source files sans packaging. Instructions for this are in Section~\ref{install}.
+
+\subsubsection{I thought I installed node.js but node -v doesn't work??}
+This should not apply to anyone who is using the packaged app. If you decided instead to download and run the code separately, and you used fnm in powershell to install node on Windows, you may need to do one extra thing to tell powershell where to find node. The github page for fnm has some instructions for this (\url{https://github.com/Schniz/fnm#shell-setup}). This may also require configuring powershell to allow startup scripts; google it or email PFPE for help.
+
+If the above information does not help you, try checking stackoverflow. If you still can't get it to work, you can try asking PFPE but we may be just as lost as you are.
 
 \subsubsection{gravitron can't read my DGS data files}
 First, make sure that you are using the `laptop' data files rather than the raw files, as those are what gravitron is designed to read. If that still doesn't work, contact PFPE with a sample of the unreadable file. It may be that gravitron doesn't yet know how to read files from your ship, as there are variations in gravimeter file format between vessels/instruments. Note that you can take and save all of the measurements necessary for a gravity tie and wait until later to compute the bias if there are issues with reading gravimeter files.
@@ -172,7 +192,7 @@ You can check some of these possibilities by using the `save current tie' button
 Note also that if you try to calculate bias but the DGS data that is loaded into the program does not cover the timespan of your water height measurements, the \texttt{avg\_dgs\_grav} value will default to -99999 so even if the gravity at the pier is calculated correctly the bias will not be.
 
 \subsubsection{I have some other question that's not answered here}
-For specific assistance, contact PFPE.
+For specific assistance, contact PFPE at \href{mailto:pfpe-internal@whoi.edu}{pfpe-internal@whoi.edu}.
 
 \subsection{Glossary}
 \begin{itemize}
@@ -182,6 +202,6 @@ For specific assistance, contact PFPE.
 \end{itemize}
 
 \subsection{Contributing to the code}
-Do you have ideas for making gravitron better? Go ahead and \href{https://github.com/hfmark/gravitron/issues}{raise an issue} on the github page or, if you're a savvy C++ programmer, submit a pull request. You can also email PFPE.
+Do you have ideas for making gravitron better? Go ahead and \href{https://github.com/hfmark/gravitron/issues}{raise an issue} on the github page or, if you're a savvy javascript programmer, submit a pull request. You can also email PFPE at \href{mailto:pfpe-internal@whoi.edu}{pfpe-internal@whoi.edu}u.
 
 \end{document}
