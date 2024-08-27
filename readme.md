@@ -1,6 +1,6 @@
 ## gravitron!
 
-gravitron[^1] [^2] is an electron app for taking gravity ties, written specifically to handle DGS instrumnents on UNOLS vessels. 
+gravitron[^1] [^2] [^3] is an electron app for taking gravity ties, written specifically to handle DGS instrumnents on UNOLS vessels. 
 
 Documentation can be found in docs/main.pdf (also accessible within the app, from the "Help" menu).
 
@@ -14,3 +14,4 @@ Contact PFPE (pfpe-internal(at)whoi.edu) with issues, comments, suggestions, etc
 
 [^1]: not affiliated with the amusement park ride designed by Wisdom Industries (which is now branded as the Starship 3000 anyway)
 [^2]: also not an elementary particle; that's a graviton.
+[^3]: and also not a Dr. Who reference; at least, not intentionally.
