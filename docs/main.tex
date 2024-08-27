@@ -157,6 +157,13 @@ If you are taking a land tie, gravitron will need calibration information for th
 
 gravitron's files can also be edited/updated with new information. If there are stations, meters, or ships that should be added, please contact PFPE.
 
+\subsection{Debug mode}
+\label{nobugs}
+The `File' menu has an option to toggle debug mode on and off. By default, debug mode is off when gravitron starts. The status column will say `debug off' when debug mode is off, and you will want to keep it off while you are taking a tie. In fact, you'll probably just want to keep it off all the time -- users can safely ignore this setting.
+
+If you turn debug mode on and try to calculate bias with some timestamped water height measurements and some loaded gravimeter data file, gravitron will internally select timestamps for the water height measurments from the times in the data file and use those times for the calculation. This is useful if you want to try out gravitron using a random old data file and don't feel like manually setting timestamps in a toml file to match the data timespan, because gravitron cannot calculate bias unless a data file is loaded that covers the times of the recorded height measurements. However, the resulting bias calculation will not be meaningful at all. 
+
+
 \section{Why do we take gravity ties?}
 If you're curious as to why you are being asked to spend 90+ minutes making water height measurements and clicking buttons on your computer, here's a quick explanation of what gravity ties are for.
 

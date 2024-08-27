@@ -5,7 +5,13 @@ const fs = require('node:fs')
 
 let mainWindow;
 
+// path for resources; switch depending on whether running packaged or not
 const resPath = app.isPackaged ? process.resourcesPath : __dirname;
+
+// debug mode bool: if true, timestamps for heights are pulled from DGS file so calculation
+// can be run using any test data file.
+let debugMode = false;
+
 // main window-creating function!
 function createWindow () {
   mainWindow = new BrowserWindow({
@@ -21,6 +27,13 @@ function createWindow () {
         {
             label: 'File         ',
             submenu: [
+                {
+                    label: 'Debug mode on/off',
+                    click: () => {
+                    debugMode = !debugMode;
+                    mainWindow.webContents.send('toggle-debug', debugMode);
+                    }
+                },
                     {
                   label: 'Close        ',
                   accelerator: 'Ctrl+W',

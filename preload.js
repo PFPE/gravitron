@@ -10,4 +10,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
   sendTieToMain: (data) => ipcRenderer.send('tie-data-kv-object', data),
   openReadTOML: () => ipcRenderer.invoke('open-read-toml'),
   returnToml: (callback) => ipcRenderer.on('tomlread',(event, content) => callback(content)),
+  toggleDebug: (callback) => ipcRenderer.on('toggle-debug',callback),
 })

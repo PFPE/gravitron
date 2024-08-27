@@ -6,7 +6,7 @@ const faafactor = 0.3086;
 const gravcal = 414125;
 const otherfactor = 8388607;
 const g0 = 10000;
-const isDebug = true;
+let isDebug = false;
 
 const statmessage = document.getElementById('statusText'); // FOR TESTING ONLY
 
@@ -128,6 +128,16 @@ class TieData {
 
 // create the tieData object
 const tieData = new TieData();
+
+// try to get debug status
+window.electronAPI.toggleDebug((event, debugStatus) => {
+    isDebug = debugStatus;
+    if (isDebug) {
+        document.getElementById("debugStatus").textContent = 'debug on';
+    } else {
+        document.getElementById("debugStatus").textContent = 'debug off';
+    }
+})
 
 
 ////////////////////////////////////////////////////////////////////////
