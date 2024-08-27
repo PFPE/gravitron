@@ -193,7 +193,7 @@ ipcMain.on('tie-data-kv-object', async (event, data) => {
       if (canceled) {
           return null;
       } else {
-        templatePath = path.join(__dirname,'toml_template.txt');
+        templatePath = path.join(resPath,'./templates/toml_template.txt');
         generateTextFile(templatePath, filePath, data);
       }
   } else {  // txt report, not toml
@@ -208,7 +208,7 @@ ipcMain.on('tie-data-kv-object', async (event, data) => {
       if (canceled) {
           return null;
       } else {
-      templatePath = data["isLandTie"] ? path.join(__dirname, 'report_template_landtie.txt') : path.join(__dirname, 'report_template.txt');
+      templatePath = data["isLandTie"] ? path.join(resPath, './templates/report_template_landtie.txt') : path.join(resPath, './templates/report_template.txt');
         generateTextFile(templatePath, filePath, data);
       }
   }
