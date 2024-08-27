@@ -407,6 +407,7 @@ var ctx = document.getElementById('myChart');
 btnBiasCalc.addEventListener('click', async () => {
     // CHECK that a DGS file has been loaded
     if (tieData.gravgrav.length === 0) {
+        statmessage.textContent = "No DGS file loaded"
         return
     }
     // get 3 (negative) heights and their timestamps (or faux timestamps)
@@ -432,6 +433,7 @@ btnBiasCalc.addEventListener('click', async () => {
     }
     // check if we have an ok pier gravity value AND we have at least one height
     if (heights.length === 0 || pier_grav < 0){
+        statmessage.textContent = "Missing pier gravity and/or water height"
         return
     }
     let avg_height = 0;
@@ -451,6 +453,7 @@ btnBiasCalc.addEventListener('click', async () => {
     const gtime0 = gravtime_epoch.reduce((min, current) => current < min ? current : min, gravtime_epoch[0]);
     const gtime1 = gravtime_epoch.reduce((max, current) => current > max ? current : max, gravtime_epoch[0]);
     if (time0 < gtime0 || time1 > gtime1) {
+        statmessage.textContent = "DGS file doesn't cover time window";
         return // DGS file timestamps do not cover the tie time period when water heights were taken
     }
 
@@ -472,7 +475,7 @@ btnBiasCalc.addEventListener('click', async () => {
     tieData.waterGrav = water_grav;
     tieData.avgMeterGrav = avg_dgs_grav;
     tieData.avgHeight = avg_height;
-    statmessage.textContent = `${bias} ${avg_height} ${avg_dgs_grav} ${water_grav} ${pier_grav}`;
+    document.getElementById("biasCalcValue").textContent = `Bias: ${bias}`;
 })
 
 
@@ -652,7 +655,7 @@ document.getElementById('btnDoLandTie').addEventListener('click', async () => {
             const land_tie_value = tieData.stationData.stationGravity + gdiff;
             tieData.landTie.landTieValue = land_tie_value;
             tieData.landTie.drift = drift;
-            statmessage.textContent = `${tieData.landTie.landTieValue}`;
+            document.getElementById("landTieStat").textContent = `Land tie: ${tieData.landTie.landTieValue}`;
 
             tieData.landTie.dtAA = AA_timedelta;
             tieData.landTie.dtAB = AB_timedelta;
@@ -661,6 +664,8 @@ document.getElementById('btnDoLandTie').addEventListener('click', async () => {
             tieData.landTie.dcAvgMgalsB = dc_avg_mgals_B;
 
         }
+    } else {
+        document.getElementById("landTieStat").textContent = "not enough counts entries and/or calibration failed"
     }
 });
 
@@ -843,6 +848,12 @@ window.electronAPI.returnToml((stuff) => {
 
     savedPerson.textContent = `Person: ${tieData.personnel}`;
     document.getElementById('personField').value = tieData.personnel;
+    if (tieData.bias !== null) {
+        document.getElementById("biasCalcValue").textContent = `Bias: ${tieData.bias}`;
+    }
+    if (tieData.landTie.landTieValue !== null) {
+        document.getElementById("landTieStat").textContent = `Land tie: ${tieData.landTie.landTieValue}`;
+    }
 
     if (tieData.h1.height !== -999){
         height1Entered.textContent = `${tieData.h1.time.toISOString()}`;
@@ -915,7 +926,7 @@ window.electronAPI.returnToml((stuff) => {
         document.getElementById('shipElev').value = tieData.landTie.shipElev;
     }
     if (tieData.landTie.shipTemp !== null) {
-        document.getElementById('shipTemp').value = tieData.landTie.shiptemp;
+        document.getElementById('shipTemp').value = tieData.landTie.meterTemp;
     }
 })
 
