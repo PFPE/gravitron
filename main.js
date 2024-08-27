@@ -48,6 +48,12 @@ function createWindow () {
                     click: () => {
                     createHelpWindow();
                     }
+                },
+                {
+                    label: 'Manual        ',
+                    click: () => {
+                    openManualWindow();
+                    }
                 }
             ]
         }
@@ -91,6 +97,19 @@ function createWindow () {
     })
 }
 
+
+function openManualWindow() {
+  let helpWindow = new BrowserWindow({
+    width: 1000,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true,
+    },
+  });
+
+  const pdfPath = path.join(__dirname,'docs/main.pdf');
+  helpWindow.loadURL(`file://${pdfPath}`);
+}
 
 function createHelpWindow() {
   let helpWindow = new BrowserWindow({

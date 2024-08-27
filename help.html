@@ -7,17 +7,16 @@
 </head>
 <body>
   <h2>How do I use gravitron?</h2>
-  <p>Documentation is provided in a pdf that ships with the app - look for "manual.pdf" in the directory where you downloaded the code.</p>
+  <p>Documentation is provided in the pdf manual, which you can also open from the 'Help' menu - look there for detailed instructions and troubleshooting.</p>
   <p>The basic process for taking/entering a gravity tie:
     <ul>
-        <li>Select a ship and a station from the dropdown menus. If needed, enter or adjust the absolute gravity value for the station and click "save" to update the value.</li>
+        <li>Select a ship and a station from the dropdown menus.</li>
         <li>Enter and save your name as the person taking the tie.</li>
         <li>Measure water height at the pier three times, with ~30 minutes elapsing between measurements. Enter each measurement when it is taken and click "save" to timestamp the value.</li>
         <li>If taking a land tie, toggle the land tie switch to "ON". Enter the land tie metadata (ship location, etc) and take the counts measurements with the land meter. Load a calibration file for the meter, and press the "Calculate land tie" button when all the information is entered.</li>
         <li>Load a gravimeter file with the "Select DGS file" button. The file should be for a time period which spans all of the water height measurements at the pier.</li>
         <li>Press "Compute bias" to calculate the tie.</li>
         <li>Press "Output tie report" to save the tie information to a txt file, and/or "Save current tie" to write the information to a TOML file. The TOML file can be re-read into the app later to add or modify information.</li>
-        <li>If you can't or don't save the pier water height or counts measurements at the time they are taken, use the save tie function to write the tie to a TOML file, edit the timestamps manually with the UTC times when the measurements were actually taken, and then reload the tie from the edited TOML file and do the bias calculation. Note that if you reload a saved tie, you need to reload the DGS file(s) and/or meter calibration files as their contents are not saved in the TOML file.</li>
     </ul>
   </p>
 </body>
