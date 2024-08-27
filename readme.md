@@ -12,5 +12,5 @@ An alternative to the packaged versions is to [install node.js and npm](https://
 ### Questions?
 Contact PFPE (pfpe-internal(at)whoi.edu) with issues, comments, suggestions, etc. Feel free to open an issue or a PR if you wish to contribute to the code.
 
-[^1] not affiliated with the amusement park ride designed by Wisdom Industries (which is now branded as the Starship 3000 anyway)
-[^2] also not an elementary particle; that's a graviton.
+[^1]: not affiliated with the amusement park ride designed by Wisdom Industries (which is now branded as the Starship 3000 anyway)
+[^2]: also not an elementary particle; that's a graviton.
