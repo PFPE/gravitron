@@ -4,6 +4,8 @@ const path = require('node:path')
 const fs = require('node:fs')
 
 let mainWindow;
+
+const resPath = app.isPackaged ? process.resourcesPath : __dirname;
 // main window-creating function!
 function createWindow () {
   mainWindow = new BrowserWindow({
@@ -59,7 +61,7 @@ function createWindow () {
 
   // read the list of ships from file
     ipcMain.handle('get-ship-options', async () => {
-        const data = fs.readFileSync('database/ships.db', 'utf8');
+        const data = fs.readFileSync(path.join(resPath,'./database/ships.db'), 'utf8');
         const options = data.split('\n').filter(option => option.trim() !== '');
         options.unshift('Choose Ship'); // for nothing selected at the start
         return options;
@@ -67,7 +69,7 @@ function createWindow () {
 
     // read the station database
     ipcMain.handle('get-stations', async () => {
-        const data = fs.readFileSync('database/stations.db', 'utf8');
+        const data = fs.readFileSync(path.join(resPath,'./database/stations.db'), 'utf8');
         const chunks = data.split('[STATION');
         chunks.shift();
         const stationDB = [];
@@ -113,7 +115,7 @@ app.whenReady().then(() => {
 })
 
 ipcMain.handle('open-dialog-landmeters', async () => {
-  const { canceled, filePaths } = await dialog.showOpenDialog({defaultPath: path.join(__dirname, 'database/land-cal'),properties:['openFile']});
+  const { canceled, filePaths } = await dialog.showOpenDialog({defaultPath: path.join(resPath, './database/land-cal'),properties:['openFile']});
     if (!canceled) {
         fs.readFile(filePaths[0],'utf8',(err,data) => {
             if (err) {
