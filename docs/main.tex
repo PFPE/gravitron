@@ -37,10 +37,10 @@ gravitron is a GUI software tool for recording gravity ties and calculating mete
 
 \section{Installation}
 \label{install}
-gravitron is an electron app for node.js v20+. If you read that last sentence and thought ``ok, I know what to do with that'' then feel free to grab the source code (\url{https://github.com/hfmark/gravitron}), and build/run it as you would any similar program on your operating system of choice. If you're not as used to programs like this, read on for some instructions.
+gravitron is an electron app for node.js v20+. If you read that last sentence and thought ``ok, I know what to do with that'' then feel free to grab the source code (\url{https://github.com/PFPE/gravitron}), and build/run it as you would any similar program on your operating system of choice. If you're not as used to programs like this, read on for some instructions.
 
 \subsection{Option 1: Packaged app}
-There are packaged applications for linux, Mac OS, and Windows available on the github releases page (\url{https://github.com/hfmark/gravitron/releases}). These will likely work well on linux, but may or may not properly install on Mac OS or Windows because they are not ``official'' applications distributed through Apple or Microsoft app stores. We promise there's nothing malicious in there, so if you can convince your computer to install from one of these packages, that's the simplest option. You can then run gravitron as you would any other application. If that doesn't work for you, go to Section \ref{runwithnode} for an alternative.
+There are packaged applications for linux, Mac OS, and Windows available on the github releases page (\url{https://github.com/PFPE/gravitron/releases}). These will likely work well on linux, but may or may not properly install on Mac OS or Windows because they are not ``official'' applications distributed through Apple or Microsoft app stores. We promise there's nothing malicious in there, so if you can convince your computer to install from one of these packages, that's the simplest option. You can then run gravitron as you would any other application. If that doesn't work for you, go to Section \ref{runwithnode} for an alternative.
 
 \subsubsection{Linux app}
 The github releases page has .rpm and .deb packages. For Ubuntu, download the .deb package and install either with software installer or by running \texttt{sudo dpkg -i /path/to/deb/file}.
@@ -60,7 +60,7 @@ Download the darwin arm64 zip file from the releases page, and good luck.
 The gravitron source code contains all the necessary pieces and instructions to install dependencies and run locally, provided you have node.js on your system. So, here's how you do it:
 \begin{itemize}
     \item Install node and npm on your computer (instructions at \url{https://nodejs.org/en/download}). In a terminal (or powershell), make sure that if you run \texttt{node -v} and \texttt{npm -v}, the commands return version numbers for node and npm.
-    \item Download the gravitron source code from \url{https://github.com/hfmark/gravitron} and unpack the files somewhere.
+    \item Download the gravitron source code from \url{https://github.com/PFPE/gravitron} and unpack the files somewhere.
     \item Navigate to those files in a terminal/powershell.
     \item In that directory (contains package.json and other files), run the command \texttt{npm ci}. This will install the dependencies for gravitron.
     \item In the same directory, run the command \texttt{npm start} to run the gravitron application. 
@@ -209,6 +209,6 @@ For specific assistance, contact PFPE at \href{mailto:pfpe-internal@whoi.edu}{pf
 \end{itemize}
 
 \subsection{Contributing to the code}
-Do you have ideas for making gravitron better? Go ahead and \href{https://github.com/hfmark/gravitron/issues}{raise an issue} on the github page or, if you're a savvy javascript programmer, submit a pull request. You can also email PFPE at \href{mailto:pfpe-internal@whoi.edu}{pfpe-internal@whoi.edu}u.
+Do you have ideas for making gravitron better? Go ahead and \href{https://github.com/PFPE/gravitron/issues}{raise an issue} on the github page or, if you're a savvy javascript programmer, submit a pull request. You can also email PFPE at \href{mailto:pfpe-internal@whoi.edu}{pfpe-internal@whoi.edu}u.
 
 \end{document}
