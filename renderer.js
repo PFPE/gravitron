@@ -425,7 +425,7 @@ btnBiasCalc.addEventListener('click', async () => {
     let height_times = [];
     [tieData.h1,tieData.h2,tieData.h3].forEach((hh,i) => {
         if (hh.height !== null && hh.height !== -999) {
-            heights.push(-1*Math.abs(hh.height));  // all height values need to be negative
+            heights.push(Math.abs(hh.height));  // height values are positive apparently
             if (isDebug) {
                 height_times.push(tieData.gravtime[20*i].getTime());
             }
