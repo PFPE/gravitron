@@ -20,8 +20,8 @@ Elevation (m): {{shipElev}}
 UTC time and meter gravity (mGal) at A1: {{ltime1}} {{lgrav1}}
 UTC time and meter gravity (mGal) at B: {{ltime2}} {{lgrav2}}
 UTC time and meter gravity (mGal) at A2: {{ltime3}} {{lgrav3}}
-Delta_T_ab (s): {{dtAB}}
-Delta_T_aa (s): {{dtAA}}
+Delta_T_ab (ms): {{dtAB}}
+Delta_T_aa (ms): {{dtAA}}
 Drift (mGal): ({{lgrav3}} - {{lgrav1}})/{{dtAA}} = {{drift}}
 Drift corrected meter gravity at B (mGal): {{lgrav2}} - {{dtAB}} * {{drift}} = {{dc_avg_mgals_B}}
 Gravity at pier (mGal): {{stationGrav}} + {{lgrav1}} - {{dc_avg_mgals_B}} = {{landTieValue}}
