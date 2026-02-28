@@ -259,7 +259,7 @@ window.electronAPI.returnDGSgrav((rows) => {
                 rgrav.push(parseFloat(tokens[3]));
                 let dates = tokens[0].split('/');
                 let timebits = tokens[1].split(':');
-                let dtime1 = new Date(Date.UTC(parseInt(dates[2]),parseInt(dates[0]),parseInt(dates[1]),parseInt(timebits[0]),parseInt(timebits[1]),parseInt(timebits[2].split('.')[[0]])));
+                let dtime1 = new Date(Date.UTC(parseInt(dates[2]),parseInt(dates[0])-1,parseInt(dates[1]),parseInt(timebits[0]),parseInt(timebits[1]),parseInt(timebits[2].split('.')[[0]])));
                 stamps.push(dtime1);
                 statmessage.textContent = `${tieData.ship} DGS file(s) read`
                 break;
@@ -268,7 +268,7 @@ window.electronAPI.returnDGSgrav((rows) => {
             case "R/V Palmer":
             case "R/V Ride":
                 rgrav.push(parseFloat(tokens[1]));
-                let dtime = new Date(Date.UTC(parseInt(tokens[19]),parseInt(tokens[20]),parseInt(tokens[21]),parseInt(tokens[22]),parseInt(tokens[23]),parseInt(tokens[24])));
+                let dtime = new Date(Date.UTC(parseInt(tokens[19]),parseInt(tokens[20])-1,parseInt(tokens[21]),parseInt(tokens[22]),parseInt(tokens[23]),parseInt(tokens[24])));
                 stamps.push(dtime);
                 statmessage.textContent = `${tieData.ship} DGS file(s) read`
                 break;
