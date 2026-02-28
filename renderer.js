@@ -718,7 +718,7 @@ function createDataObj(tieData) {
         lgrav2: tieData.landTie.mgalAvgs[1],
         lgrav3: tieData.landTie.mgalAvgs[2],
         dtAB: tieData.landTie.dtAB,
-        dtAA: tieData.landTie.dtAB,
+        dtAA: tieData.landTie.dtAA,
         landTieValue: tieData.landTie.landTieValue,
         drift: tieData.landTie.drift,
         dc_avg_mgals_B: tieData.landTie.dcAvgMgalsB,
