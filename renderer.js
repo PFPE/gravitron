@@ -922,8 +922,8 @@ window.electronAPI.returnToml((stuff) => {
         c2Entered.textContent = `${tieData.landTie.c2.time.toISOString()}`;
         document.getElementById('ltc2').value = tieData.landTie.c2.height;
     }
-    if (tieData.landTie.a3.height !== -999){
-        c3Entered.textContent = `${tieData.landTie.a3.time.toISOString()}`;
+    if (tieData.landTie.c3.height !== -999){
+        c3Entered.textContent = `${tieData.landTie.c3.time.toISOString()}`;
         document.getElementById('ltc3').value = tieData.landTie.c3.height;
     }
     if (tieData.landTie.shipLon !== null) {
