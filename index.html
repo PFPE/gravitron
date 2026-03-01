@@ -142,7 +142,14 @@
           <select id="stationDropdown">
           </select>
     </div>
+      <!-- generic vs special DGS read toggle switch-->
+      <label class="switch">
+          <input type="checkbox" id="toggleRead">
+          <span class="slider"></span>
+      </label>
+      <p>Ship's read function: <span id="toggleReadState">OFF</span></p>
     <div class="entry-group">
+    
       <div class="input-button-group">
         <input type="number" step="0.01" id="gravOverride" placeholder="station grav">
         <button id="btnOverrideGrav">Save</button>

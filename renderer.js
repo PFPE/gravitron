@@ -111,6 +111,7 @@ class TieData {
         this.personnel = null;
 
         this.ship = null;  // ship selected
+        this.isshipspec = false;  // t/f use ship-specific DGS read function
         //this.alt_ship = null; // not sure if we need this? for "other" case
         this.gravgrav = null; // this is the dgs data gravity time series
         this.gravtime = null; // goes with ship bc need to know which ship for read function
@@ -183,6 +184,14 @@ const selectedOption = document.getElementById('selectedShip');
 shipDropdown.addEventListener('change', (event) => {
     tieData.ship = event.target.value;
     selectedOption.textContent = `Ship: ${tieData.ship}`;
+});
+
+// handle toggling between ship-specific and generic DGS read functions
+const toggleRead = document.getElementById('toggleRead');
+const toggleReadDisplay = document.getElementById('toggleReadState');
+toggleRead.addEventListener('change', () => {
+    tieData.isshipspec = toggleRead.checked;
+    toggleReadDisplay.textContent = tieData.isshipspec ? 'ON' : 'OFF';
 });
 
 // handle selecting station and getting absolute gravity value for it
