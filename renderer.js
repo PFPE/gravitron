@@ -111,6 +111,7 @@ class TieData {
         this.personnel = null;
 
         this.ship = null;  // ship selected
+        this.isshipspec = false;  // t/f use ship-specific DGS read function
         //this.alt_ship = null; // not sure if we need this? for "other" case
         this.gravgrav = null; // this is the dgs data gravity time series
         this.gravtime = null; // goes with ship bc need to know which ship for read function
@@ -185,6 +186,14 @@ shipDropdown.addEventListener('change', (event) => {
     selectedOption.textContent = `Ship: ${tieData.ship}`;
 });
 
+// handle toggling between ship-specific and generic DGS read functions
+const toggleRead = document.getElementById('toggleRead');
+const toggleReadDisplay = document.getElementById('toggleReadState');
+toggleRead.addEventListener('change', () => {
+    tieData.isshipspec = toggleRead.checked;
+    toggleReadDisplay.textContent = tieData.isshipspec ? 'ON' : 'OFF';
+});
+
 // handle selecting station and getting absolute gravity value for it
 const selectedStation = document.getElementById('selectedStation');
 const stationGravText = document.getElementById('stationGrav');
@@ -253,27 +262,51 @@ window.electronAPI.returnDGSgrav((rows) => {
     let rgrav = [];
     rows.forEach(rw => {
         const tokens = rw.split(",");
-        // case split based on selected ship
-        switch (tieData.ship) {
-            case "R/V Thompson":
-                rgrav.push(parseFloat(tokens[3]));
-                let dates = tokens[0].split('/');
-                let timebits = tokens[1].split(':');
-                let dtime1 = new Date(Date.UTC(parseInt(dates[2]),parseInt(dates[0])-1,parseInt(dates[1]),parseInt(timebits[0]),parseInt(timebits[1]),parseInt(timebits[2].split('.')[[0]])));
-                stamps.push(dtime1);
-                statmessage.textContent = `${tieData.ship} DGS file(s) read`
-                break;
-            case "R/V Atlantis":
-            case "R/V Revelle":
-            case "R/V Palmer":
-            case "R/V Ride":
+        // case split: use ship-specific read function or generic DGS laptop read function
+        // note that for some ships it's the same either way
+        switch (tieData.isshipspec) {
+            case true:
+            // case split based on selected ship
+            switch (tieData.ship) {
+                case "R/V Thompson":
+                    rgrav.push(parseFloat(tokens[3]));
+                    let dates = tokens[0].split('/');
+                    let timebits = tokens[1].split(':');
+                    // if file is not Thompson-specific, this is where it should fail:
+                    try {
+                        let dtime1 = new Date(Date.UTC(parseInt(dates[2]),parseInt(dates[0])-1,parseInt(dates[1]),parseInt(timebits[0]),parseInt(timebits[1]),parseInt(timebits[2].split('.')[[0]])));
+                    } catch {
+                        statmessage.textContent = 'DGS file not read, wrong format/function?';
+                    }
+                    stamps.push(dtime1);
+                    statmessage.textContent = `${tieData.ship} DGS file(s) read`
+                    break;
+                case "R/V Atlantis":
+                case "R/V Revelle":
+                case "R/V Palmer":
+                case "R/V Ride":
+                    rgrav.push(parseFloat(tokens[1]));
+                    try {
+                        let dtime = new Date(Date.UTC(parseInt(tokens[19]),parseInt(tokens[20])-1,parseInt(tokens[21]),parseInt(tokens[22]),parseInt(tokens[23]),parseInt(tokens[24])));
+                    } catch {
+                        statmessage.textContent = 'time parsing error, check file';
+                    }
+                    stamps.push(dtime);
+                    statmessage.textContent = `${tieData.ship} DGS file(s) read`
+                    break;
+                default:
+                    statmessage.textContent = 'ship-specific read not supported';
+                    break;
+            }
+            case false:
                 rgrav.push(parseFloat(tokens[1]));
-                let dtime = new Date(Date.UTC(parseInt(tokens[19]),parseInt(tokens[20])-1,parseInt(tokens[21]),parseInt(tokens[22]),parseInt(tokens[23]),parseInt(tokens[24])));
+                try {
+                    let dtime = new Date(Date.UTC(parseInt(tokens[19]),parseInt(tokens[20])-1,parseInt(tokens[21]),parseInt(tokens[22]),parseInt(tokens[23]),parseInt(tokens[24])));
+                } catch {
+                    statmessage.textContent = 'time parsing error, check file';
+                }
                 stamps.push(dtime);
-                statmessage.textContent = `${tieData.ship} DGS file(s) read`
-                break;
-            default:
-                statmessage.textContent = 'ship not supported';
+                statmessage.textContent = `generic DGS file(s) read`;
                 break;
         }
     })

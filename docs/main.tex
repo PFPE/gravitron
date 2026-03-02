@@ -19,7 +19,7 @@
 
 % Frontmatter data; appears on title page
 \title{gravitron manual}
-\version{1.0.0}
+\version{1.0.1}
 \author{Hannah F. Mark}
 \license{CC-BY 4.0}
 %%%%%%%%%%%%%%%%%\softwarelogo{\includegraphics[width=8cm]{figs/grav_photo}}
@@ -97,6 +97,7 @@ Buttons and fields for land tie information and actions will appear greyed out u
     \begin{itemize}
     \item Select a ship from the dropdown menu.
     \item Select a station from the dropdown menu. This will populate the input field below the menu with the gravity value for that station. If you choose `Other', you will need to change the value in that input field and press save. The station gravity value to be used for the tie will appear in the status column on the right side of the window.
+    \item If you are using a ship-specific file format for the meter data (see Section~\ref{file-types}), toggle the switch for ``Ship's read function'' to ON.
     \item Enter the name of the tie-taker in the input field labeled `your name' and save it.
     \end{itemize}
 \item \textbf{For land ties only:} Click the land tie toggle switch to the `on' position, and enter land meter metadata
@@ -136,6 +137,12 @@ Then, back in gravitron, use the `Load saved tie' button to read the edited toml
 
 \subsubsection{When do I need to do a land tie?}
 Land ties are only necessary when the nearest station with a known gravity measurement is not right next to where the ship is docked -- specifically, if the station is more than 50m away from the ship. Gravity is measured with a calibrated meter on the ship, at the station, and then on the ship again, and those measurements are used to calculate an absolute gravity measurement for the ship's location that is referenced to the established station value.
+
+\subsubsection{Which type of DGS file should I be using?}
+\label{file-types}
+The laptop attached to the gravimeter, running the DGS software, will be writing two types of files: a `raw' file that contains uncalibrated gravity measurements (AD counts) and a `processed' file that has calibrated gravity values. For a tie, you will always want the `processed' file. The `processed' file format as written directly from the DGS software \textit{should} be the same for all ships. 
+
+\textbf{Files that you get from the ship's shared data drive may have some additional formatting.} For example, some ships will prepend a timestamp from one of their nav systems to each data string. For those files, \texttt{gravitron} tries to provide ship-specific functions to read the meter files. To use these functions, the ``Ship's read function'' toggle switch should be set to ON. However, not all ships are supported, and ship-specific formats may change. If you are unable to read a DGS file because the ship's format is unsupported, you can try pulling the processed file directly from the DGS laptop and reading it with the ``Ship's read function'' toggle switch set to OFF (to use the generic DGS read function).
 
 \subsection{Saving and re-reading ties}
 \label{save-re}
@@ -189,7 +196,7 @@ This should not apply to anyone who is using the packaged app. If you decided in
 If the above information does not help you, try checking stackoverflow. If you still can't get it to work, you can try asking PFPE but we may be just as lost as you are.
 
 \subsubsection{gravitron can't read my DGS data files}
-First, make sure that you are using the `laptop' data files rather than the raw files, as those are what gravitron is designed to read. If that still doesn't work, contact PFPE with a sample of the unreadable file. It may be that gravitron doesn't yet know how to read files from your ship, as there are variations in gravimeter file format between vessels/instruments. Note that you can take and save all of the measurements necessary for a gravity tie and wait until later to compute the bias if there are issues with reading gravimeter files.
+First, make sure that you are using the `laptop' data files rather than the raw files, as those are what gravitron is designed to read. Next, look at Section~\ref{file-types} and make sure you are using the correct read function (ship-specific or not). If that still doesn't work, contact PFPE with a sample of the unreadable file. It may be that gravitron doesn't yet know how to read files from your ship, as there are variations in gravimeter file format between vessels/instruments. Note that you can take and save all of the measurements necessary for a gravity tie and wait until later to compute the bias if there are issues with reading gravimeter files.
 
 \subsubsection{The calculated bias number is really weird}
 There are several possibilities here, but they all boil down to: there's probably some miscommunication between us and the gravitron program. Maybe the timestamps for measurements are incorrect, or the DGS file is not being read properly, or there is some mixup with measurement units. 
