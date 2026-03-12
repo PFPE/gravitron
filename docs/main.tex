@@ -53,7 +53,13 @@ The packaged .exe installer has been tested on Windows 11 and it seems to work! 
 \noindent \texttt{AppData} is a hidden folder.
 
 \subsubsection{Mac app}
-Download the darwin arm64 zip file from the releases page, and good luck.
+Download the darwin arm64 zip file from the releases page, and place the download in your Applications folder. If you are running OS<15, try opening the app and following system prompts to bypass the security settings that prevent running gravitron as an un-signed application. If that is not an option (ie the system prompt just says the app is bad and should be deleted), open a terminal and run:
+
+\texttt{xattr -d com.apple.quarantine /path/to/gravitron.app}
+
+\noindent where, if you put the app in the suggested location, the path should be \texttt{/Applications/gravitron.app}. You may need to run this command specifically from an administrator account.
+
+There are also options to globally disable the security settings for unsigned apps in OS 15+. We don't recommend that, but if you are interested you can find information by searching the apple forums and/or stackoverflow.
 
 \subsection{Option 2: Run the code on your own}
 \label{runwithnode}
